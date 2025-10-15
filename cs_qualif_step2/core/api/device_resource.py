@@ -14,6 +14,13 @@ device_router = APIRouter(
     tags=["devices"]
 )
 
+@device_router.get(
+    "/devices/{device_id}")
+def configurate_device(device_id: str,
+           device_service: DeviceService = Depends(get_device_service),):
+    device = device_service.get_device(device_id)
+
+    return JSONResponse(status_code=status.HTTP_200_OK).body(device)
 
 @device_router.post("")
 def register_device(
@@ -35,3 +42,14 @@ def register_device(
         status_code=status.HTTP_200_OK,
         content={"device_id": device_id}
     )
+
+#⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⡄⠀⠀⢀⣤⣄⡀⠀⠀⠀⠀⠀
+#⠀⣠⣾⡿⠿⣿⣿⣿⣶⣶⣶⡾⠙⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡤⢶⢿⣿⣶⡶⠠⡾⠟⠁⢠⣾⡏⠛⠋⠀⠀⠀⠀⠀⠀
+#⢰⡟⠁⣠⡾⠉⣿⣿⢹⠉⠉⠀⠀⣿⣇⣰⣦⣀⠀⣠⣤⡀⢀⣴⣄⠀⠀⠀⣀⣴⣄⡀⠀⠀⠀⠀⠀⢸⣿⡇⡆⠀⠉⠋⠀⣠⣤⣀⠀⢸⣿⣇⠀⡀⠀⢀⣠⣤⠀⠀
+#⠾⢀⣾⣿⠁⠀⣿⣿⢻⠀⠀⠀⠀⣿⡏⠉⣿⣿⠉⢹⣿⡏⠈⣿⣿⠀⢰⣾⡏⠙⣿⣿⠀⠀⠀⠀⣀⣼⣿⡇⡇⠀⠀⠀⠀⠉⣿⣿⠙⠻⣿⡟⠛⠃⢸⣿⡟⣿⣧⡀
+#⠀⢸⣿⣟⠀⠀⣿⣿⣸⠀⠀⠀⠀⣿⡇⠀⣿⣿⠀⢸⣿⡇⠀⣿⣷⠀⢸⣿⡇⠀⣿⣿⠀⠀⠀⢰⠿⢻⣿⡇⡇⠀⠀⠀⠀⠀⣿⣿⠀⠰⣿⡇⠀⠀⢸⣿⣇⡼⠛⠁
+#⠀⠸⣿⣿⡀⢀⡿⠛⢻⠀⠀⠀⢠⣿⡇⠀⣿⣿⠀⢸⣿⡇⠀⣿⣿⠀⢸⣿⡇⠀⣿⣿⠀⠀⠀⠀⠀⢸⣿⠇⡇⠀⠀⠀⠀⠀⣿⣿⠀⢸⣿⡇⠀⠀⢸⣿⡇⠀⠀⠀
+#⠀⠀⢻⣿⣿⣏⡀⠀⣹⠀⢀⣠⢼⣿⣇⠀⣿⣿⠀⢸⣿⣇⢀⣿⣿⠀⢸⣿⣇⠀⣿⣿⠀⠀⠀⠀⣠⣿⣧⣶⣷⣤⣀⣀⡤⢀⣿⣿⠀⢸⣿⣇⢀⠀⣸⣿⣧⣀⣀⠀
+#⠀⠀⠀⠙⠻⠿⣿⣿⣿⠿⠛⠁⠈⠻⠟⠁⣿⡿⠀⠈⠛⠿⠋⠛⠿⠋⠈⠙⣿⠟⢿⣿⡆⠀⠠⠞⠋⠉⠛⠛⠛⠿⠿⠏⠀⠈⠻⠿⠃⠈⠛⠿⠋⠀⠀⠙⠻⠟⠁⠀
+#⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣶⣮⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+#⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠈⠉⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
